@@ -1,17 +1,22 @@
+/* eslint-disable jsx-a11y/interactive-supports-focus */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import Gif from './gif';
 
 class GifList extends Component {
-  render({ gifs }, { selectGif }) {
+  render() {
     return (
       <div className="gif-list">
-        {gifs.map((gif) => {
+        {this.props.gifs.map((gif) => {
+          console.log(gif.id);
+          console.log(this.props.selectGif);
           return (
             <Gif
-              id={gif.id}
+              selectedGifId={gif.id}
               key={gif.id}
-              onClick={selectGif(gif.id)}
+              selectGif={this.props.selectGif}
             />
           );
         })}

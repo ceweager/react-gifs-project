@@ -1,14 +1,24 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 
 class Gif extends Component {
-  constructor({ id }) {
-    super();
-    this.link = `https://media2.giphy.com/media/${id}/200.gif`;
+  handleClick = () => {
+    if (this.props.selectGif) {
+      this.props.selectGif(this.props.selectedGifId);
+    }
   }
 
-  render() {
+  render = () => {
+    const src = `https://media2.giphy.com/media/${this.props.selectedGifId}/200.gif`;
     return (
-      <img src={this.link} alt="" className="gif" />
+      <img
+        src={src}
+        alt=""
+        className="gif"
+        onClick={this.handleClick}
+      />
     );
   }
 }

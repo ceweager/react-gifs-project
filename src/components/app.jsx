@@ -13,39 +13,46 @@ class App extends Component {
     this.state = {
       gifs: [
         {
-          id: "covid-corona-vaccine-bYdeAudjggLszkyQhq"
+          id: "bYdeAudjggLszkyQhq"
         },
         {
-          id: "covid-corona-vaccine-6lczcXhRf5UrcOnVL0"
+          id: "6lczcXhRf5UrcOnVL0"
         }
       ],
-      selectedGif: ""
+      selectedGifId: "6lczcXhRf5UrcOnVL0"
     };
   }
 
   search = (query) => {
-    giphy('1KMPHCBIOe3gOjJwCJQX49sRc6cM0oIM').search(`${query}`, (err, res) => {
+    giphy('1KMPHCBIOe3hOjJwCJQX49sRc6cM0oIm').search({ limit: 10, q: `${query}` }, (err, res) => {
+      console.log(res.data);
       this.setState({ gifs: res.data });
     });
   }
 
   selectGif = (id) => {
-    this.setState({ selectedGif: id });
+    this.setState({ selectedGifId: id });
   }
 
   render() {
     return (
       <div>
         <div className="left-scene">
-          <Search />
-          <div>
-            <Gif gif={this.state.selectedGif} />
+          <div className="form-search">
+            <Search
+              search={this.search}
+            />
+          </div>
+          <div className="selected-gif">
+            <Gif
+              selectedGifId={this.state.selectedGifId}
+              key={this.state.selectedGifId}
+            />
           </div>
         </div>
         <div className="right-scene">
           <GifList
             gifs={this.state.gifs}
-            search={this.search}
             selectGif={this.selectGif}
           />
         </div>
