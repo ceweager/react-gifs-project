@@ -11,7 +11,7 @@ class Gif extends Component {
   }
 
   render = () => {
-    if (!this.props.id) {
+    if (!this.props.selectedGifId) {
       return null;
     }
     const src = `https://media2.giphy.com/media/${this.props.selectedGifId}/200.gif`;
